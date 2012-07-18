@@ -113,7 +113,15 @@ $PAGE->set_subpage($currentpage->id);
 $PAGE->set_title(fullname($user).": $strpublicprofile");
 $PAGE->set_heading(fullname($user).": $strpublicprofile");
 
-if (!$currentuser) {
+
+/// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  bedingung eingefügt
+// Unterhalb von hier muß das Problem sein / die 2. Zeile (mit navigation->extend_for_user) generiert den Namen
+// Wenn man in der 2. Zeile $user mit $userid auswechselt hat es keinen Effekt. Aber bei $user1 kommt "My Profile"
+// Hier die Eigenschaften so modifiziert, daß nur Paten und Admins zugriff haben.
+// moodle/user:viewdetails geändert zu moodle/site:viewfullnames
+
+if (!$currentuser
+  and has_capability('moodle/site:viewfullnames', $usercontext)) {
     $PAGE->navigation->extend_for_user($user);
     if ($node = $PAGE->settingsnav->get('userviewingsettings'.$user->id)) {
         $node->forceopen = true;

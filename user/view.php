@@ -146,7 +146,12 @@ if ($currentuser) {
 
 /// We've established they can see the user's name at least, so what about the rest?
 
-if (!$currentuser) {
+/// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  bedingung eingefügt
+// Hier die Eigenschaften so modifiziert, daß nur Paten und Admins zugriff haben.
+// moodle/user:viewdetails geändert zu moodle/site:viewfullnames
+
+if (!$currentuser
+  and has_capability('moodle/site:viewfullnames', $usercontext)) {
     $PAGE->navigation->extend_for_user($user);
     if ($node = $PAGE->settingsnav->get('userviewingsettings'.$user->id)) {
         $node->forceopen = true;

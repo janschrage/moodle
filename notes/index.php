@@ -76,7 +76,13 @@ if ($course->id == SITEID) {
 $systemcontext = get_context_instance(CONTEXT_SYSTEM);   // SYSTEM context
 
 $strnotes = get_string('notes', 'notes');
-if ($userid) {
+
+
+// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// Bedingung eingefügt
+
+if ($userid
+  and has_capability('moodle/site:viewfullnames', $coursecontext) and has_capability('moodle/notes:manage', $coursecontext)) {
     $PAGE->set_context(get_context_instance(CONTEXT_USER, $user->id));
     $PAGE->navigation->extend_for_user($user);
 } else {
