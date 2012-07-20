@@ -69,6 +69,6 @@ $wikipage->set_paging($paging);
 $wikipage->set_allversion($allversion);
 
 $wikipage->print_header();
-/// Vorübergehend deaktiviert wegen Sicherheit $wikipage->print_content();
+$wikipage->print_content();
 
 $wikipage->print_footer();
