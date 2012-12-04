@@ -57,7 +57,7 @@ if ($hassiteconfig) { // speedup for non-admins, add all caps used on this page
         )));
     $temp->add(new admin_setting_special_calendar_weekend());
     $options = array();
-    for ($i=1; $i<=99; $i++) {
+    for ($i=1; $i<=365; $i++) {
         $options[$i] = $i;
     }
     $temp->add(new admin_setting_configselect('calendar_lookahead',get_string('configlookahead','admin'),get_string('helpupcominglookahead', 'admin'),21,$options));
