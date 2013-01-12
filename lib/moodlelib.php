@@ -3347,10 +3347,17 @@ function fullname($user, $override=false) {
         }
     }
 
+    /* Return first name plus first letter of last name unless capability 
+     * site:viewfullname is set or override is true
+     */
+	if (!$override) {
+    	$user->lastname = $user->lastname[0].'.';
+	}
+
     if (!empty($SESSION->fullnamedisplay)) {
         $CFG->fullnamedisplay = $SESSION->fullnamedisplay;
     }
-
+ 
     if (!isset($CFG->fullnamedisplay) or $CFG->fullnamedisplay === 'firstname lastname') {
         return $user->firstname .' '. $user->lastname;
 
@@ -3361,7 +3368,10 @@ function fullname($user, $override=false) {
         if ($override) {
             return get_string('fullnamedisplay', '', $user);
         } else {
-            return $user->firstname;
+		    /* Return first name plus first letter of last name unless capability 
+		     * site:viewfullname is set or override is true
+		     */
+            return $user->firstname.' '.$user->lastname[0].'.';
         }
     }
 
